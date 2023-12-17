@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Customer;
-
+use App\Http\Controllers\Api\AnalysisController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,11 @@ use App\Models\Customer;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::middleware('auth:sanctum')
+->get('/analysis', [AnalysisController::class,'index'])
+->name('analysis.index');
+
 Route::middleware('auth:sanctum')
 ->get('/searchCustomers', function (Request $request) {
     return Customer::searchCustomers($request->search)
